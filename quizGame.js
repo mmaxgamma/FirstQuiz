@@ -6,6 +6,7 @@ let answerThree = document.getElementById("answerThree");
 let answerFour = document.getElementById("answerFour");
 let answerChoices = [answerOne, answerTwo, answerThree, answerFour];
 let score = 0;
+
 const answerCheck = (userChoice, correctChoice) => {
     if (userChoice == correctChoice) {
         score++;
@@ -29,24 +30,33 @@ const buildQuiz = () => {
 
     //For each question in the array...
     //for(let i=0; i < questionAnswer.length; i++) {
+    index = 0;
+    //while (index < 1) {
 
         //Overwrites current question and answer choices depending on the question being asked
+        //FOr future projects the questions and answer choices could be an object.
         question.innerHTML = questionAnswer[index].question;
         answerOne.innerHTML = questionAnswer[index].answers[0];
         answerTwo.innerHTML = questionAnswer[index].answers[1];
         answerThree.innerHTML = questionAnswer[index].answers[2];
         answerFour.innerHTML = questionAnswer[index].answers[3];
         
-        for(let j=0; j < answerChoices.length; j++) {
+        //Adds click events to each button, which check if the answer chosen was correct.
+            for(let j=0; j < answerChoices.length; j++) {
                 answerChoices[j].addEventListener("click", function() {
                     userChoice = answerChoices[j].innerHTML;
                     console.log(userChoice);
                     console.log(questionAnswer[index].correctAnswer);
-                    answerCheck(userChoice, questionAnswer[index].correctAnswer);                   
+                    answerCheck(userChoice, questionAnswer[index].correctAnswer);        
+                    index++; 
+                    question.innerHTML = questionAnswer[index].question;
+                    answerOne.innerHTML = questionAnswer[index].answers[0];
+                    answerTwo.innerHTML = questionAnswer[index].answers[1];
+                    answerThree.innerHTML = questionAnswer[index].answers[2];
+                    answerFour.innerHTML = questionAnswer[index].answers[3];          
                 }
             );    
         }
-        index++;
     //};
 
     //answerChoices[0].addEventListener("click", console.log("Hey you clicked me!"))
